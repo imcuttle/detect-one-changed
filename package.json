@@ -1,0 +1,62 @@
+{
+  "name": "detect-one-changed",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Detect first changed html and markdown between old text and new",
+  "author": "imcuttle <moyuyc95@gmail.com>",
+  "scripts": {
+    "test": "jest",
+    "prepublishOnly": "npm test",
+    "doc": "documentation --github --markdown-toc=false readme index.js -a public -s \"API\" && git add README.md",
+    "version": "npm run doc && npm run changelog",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=6"
+  },
+  "keywords": [
+    "imcuttle",
+    "detect",
+    "one",
+    "changed",
+    "detect-one-changed"
+  ],
+  "typings": "index.d.ts",
+  "license": "MIT",
+  "repository": "imcuttle/detect-one-changed",
+  "jest": {
+    "testMatch": [
+      "**/__test{s,}__/*.(spec|test).{t,j}s{x,}"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-conventional": "^7.1.2",
+    "@types/jest": "^23.3.8",
+    "conventional-changelog-cli": "^2.0.5",
+    "documentation": "^8.1.2",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
+    "prettier": "^1.14.3",
+    "pretty-quick": "^1.8.0",
+    "remark-html": "^8.0.0"
+  },
+  "dependencies": {
+    "@moyuyc/walk-tree": "^1.0.2",
+    "lodash.isequalwith": "^4.4.0",
+    "rehype": "^6.0.0",
+    "remark": "^10.0.0"
+  }
+}
