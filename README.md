@@ -9,7 +9,18 @@
 
 > Detect first changed html and markdown between old text and new
 
-## ⚠WIP!
+## Table of Contents
+
+<!-- toc -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+- [Contributing](#contributing)
+- [Authors](#authors)
+- [License](#license)
+
+<!-- tocstop -->
 
 ## Installation
 
@@ -22,10 +33,33 @@ yarn add detect-one-changed
 ## Usage
 
 ```javascript
-const detectOneChanged = require('detect-one-changed')
+const { detectMarkdown } = require('detect-one-changed')
+
+detectMarkdown('# old', '# new').text
+// => '<p class="detected-updated" style="">\n\n# new\n\n</p>\n'
+```
+
+```javascript
+const { detectMarkdown } = require('detect-one-changed')
+const remark = require('remark')
+const html = require('remark-html')
+
+remark()
+  .use(html)
+  .stringify(detectMarkdown('# old', '# new', { wrapType: 'ast' }).ast)
+// => '<h1 class="detected-updated">new</h1>\n'
+```
+
+```javascript
+const { detectHtml } = require('detect-one-changed')
+
+detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
+// => '<p class="detected-updated new-cls">new</p>'
 ```
 
 ## API
+
+[See API](./docs/api.md)
 
 ## Contributing
 

@@ -44,7 +44,7 @@ const getPostPaths = (context, ast) => {
 
 function detectFirstChanged(traverseAst, contrastAst) {
   const state = {}
-  const dp = {}
+  // const dp = {}
   const refGetter = createCachedChildGetter(contrastAst, null)
   walk(
     traverseAst,

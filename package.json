@@ -7,8 +7,9 @@
   "scripts": {
     "test": "jest",
     "prepublishOnly": "npm test",
-    "doc": "documentation --github --markdown-toc=false readme index.js -a public -s \"API\" && git add README.md",
-    "version": "npm run doc && npm run changelog",
+    "toc": "markdown-toc --maxdepth=2 -i README.md && git add README.md",
+    "doc": "documentation --markdown-toc=true --readme-file=docs/api.md readme index.js -a public -s \"API\" && git add docs/api.md",
+    "version": "npm run doc && npm run toc && npm run changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "husky": {
@@ -49,12 +50,15 @@
     "documentation": "^8.1.2",
     "husky": "^1.1.2",
     "jest": "^23.6.0",
+    "markdown-doc": "^1.0.6",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0",
-    "remark-html": "^8.0.0"
+    "remark-html": "^8.0.0",
+    "remark-preset-gfm": "^1.0.1"
   },
   "dependencies": {
     "@moyuyc/walk-tree": "^1.0.2",
+    "is-plain-obj": "^1.1.0",
     "lodash.isequalwith": "^4.4.0",
     "rehype": "^6.0.0",
     "remark": "^10.0.0"

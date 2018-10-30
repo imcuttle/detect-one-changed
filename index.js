@@ -4,6 +4,7 @@
  * @date 2018/10/27
  *
  */
+const isPlainObject = require('is-plain-obj')
 const detectChanged = require('./detectFirstChanged')
 
 const remark = require('remark')()
@@ -11,13 +12,18 @@ const remark = require('remark')()
   .freeze()
 
 const rehype = require('rehype')()
-  // .use({ settings: { position: false } })
+  .data('settings', { fragment: true })
   .freeze()
 
+/**
+ * Find changed one node from AST
+ * @public
+ * @param {AST} oldAst
+ * @param {AST} newAst
+ * @param {DetectOptions} options
+ * @return {null|DetectedState}
+ */
 function detectAst(oldAst, newAst, { reverse = true } = {}) {
-  // oldAst = Object.assign({}, oldAst)
-  // newAst = Object.assign({}, newAst)
-
   if (reverse) {
     oldAst.children = oldAst.children.reverse()
     newAst.children = newAst.children.reverse()
@@ -38,16 +44,37 @@ function detectAst(oldAst, newAst, { reverse = true } = {}) {
   return state
 }
 
+/**
+ * Detect markdown updating
+ * @public
+ * @param {AST|string} oldMarkdown
+ * @param {AST|string} newMarkdown
+ * @param {DetectMarkdownOptions} options
+ * @return DetectResult
+ */
 function detectMarkdown(
   oldMarkdown,
   newMarkdown,
-  { wrapTag = 'p', wrapType = 'html', reverse = true, style, className = 'detected-updated' } = {}
+  {
+    wrapTag = 'p',
+    wrapType = 'html',
+    ast = true,
+    text = true,
+    reverse = true,
+    style = '',
+    className = 'detected-updated'
+  } = {}
 ) {
-  if (oldMarkdown === newMarkdown) {
-    return newMarkdown
+  if (typeof oldMarkdown !== 'string' && !isPlainObject(oldMarkdown)) {
+    throw new TypeError('`oldMarkdown` is required type of string or plain object, but ' + typeof oldMarkdown)
   }
-  let oldAst = remark.parse(oldMarkdown)
-  let newAst = remark.parse(newMarkdown)
+
+  if (typeof newMarkdown !== 'string' && !isPlainObject(newMarkdown)) {
+    throw new TypeError('`newMarkdown` is required type of string or plain object, but ' + typeof newMarkdown)
+  }
+
+  let oldAst = typeof oldMarkdown === 'string' ? remark.parse(oldMarkdown) : oldMarkdown
+  let newAst = typeof newMarkdown === 'string' ? remark.parse(newMarkdown) : newMarkdown
   let state = detectAst(oldAst, newAst, { reverse })
 
   let node
@@ -114,23 +141,46 @@ function detectMarkdown(
     newAst.children = newAst.children.reverse()
   }
   return {
-    text: remark.stringify(newAst),
-    ast: newAst,
+    text: text ? remark.stringify(newAst) : null,
+    ast: ast ? newAst : null,
     state,
     node
   }
 }
 
-function detectHtml(oldHtml, newHtml, { reverse = true, activeClassName = 'detected-updated' } = {}) {
-  if (oldHtml === newHtml) {
-    return newHtml
+/**
+ * Detect html updating
+ * @public
+ * @param {AST|string} oldHtml
+ * @param {AST|string} newHtml
+ * @param {DetectTextOptions} options
+ * @return {DetectResult}
+ * @example
+ * const { detectHtml } = require('detect-one-changed')
+ *
+ * detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
+ * // => '<p class="detected-updated new-cls">new</p>'
+ */
+function detectHtml(
+  oldHtml,
+  newHtml,
+  { ast = true, text = true, reverse = true, style = '', className = 'detected-updated' } = {}
+) {
+  if (typeof oldHtml !== 'string' && !isPlainObject(oldHtml)) {
+    throw new TypeError('`oldHtml` is required type of string or plain object, but ' + typeof oldHtml)
   }
-  let oldAst = rehype.parse(oldHtml)
-  let newAst = rehype.parse(newHtml)
+
+  if (typeof newHtml !== 'string' && !isPlainObject(newHtml)) {
+    throw new TypeError('`newHtml` is required type of string or plain object, but ' + typeof newHtml)
+  }
+
+  let oldAst = typeof oldHtml === 'string' ? rehype.parse(oldHtml) : oldHtml
+  let newAst = typeof newHtml === 'string' ? rehype.parse(newHtml) : newHtml
   let state = detectAst(oldAst, newAst, { reverse })
 
+  let node
   if (state) {
-    let node = state.node
+    node = state.node
     if (node) {
       let pos = 0
       while (node && node.type === 'text') {
@@ -140,7 +190,15 @@ function detectHtml(oldHtml, newHtml, { reverse = true, activeClassName = 'detec
       }
       if (node) {
         const hProps = (node.properties = node.properties || {})
-        hProps.className = [activeClassName].concat(hProps.className).filter(Boolean)
+        if (className) {
+          hProps.className = [className].concat(hProps.className).filter(Boolean)
+        }
+        if (style) {
+          hProps.style = [style]
+            .concat(hProps.style)
+            .filter(Boolean)
+            .join(' ')
+        }
       }
     }
   }
@@ -149,11 +207,78 @@ function detectHtml(oldHtml, newHtml, { reverse = true, activeClassName = 'detec
     newAst.children = newAst.children.reverse()
   }
   return {
-    text: rehype.stringify(newAst),
-    ast: newAst,
-    state
+    text: text ? rehype.stringify(newAst) : null,
+    ast: ast ? newAst : null,
+    state,
+    node
   }
 }
+
+/**
+ * @public
+ * @typedef {{}} AST
+ * @see [Markdown AST](https://github.com/syntax-tree/mdast)
+ * @see [HTML AST](https://github.com/syntax-tree/hast)
+ * @see [remark](https://github.com/remarkjs/remark) - Markdown processor on MDAST
+ * @see [rehype](https://github.com/rehypejs/rehype) - Markdown processor on HAST
+ */
+
+/**
+ * @public
+ * @typedef {{}} DetectOptions
+ * @param {boolean} [reverse=true]
+ */
+
+/**
+ * @public
+ * @typedef {{}} DetectedState
+ * @param {AST} node - Founded node
+ * @param {number[]} paths - The child indexes' track when traversing AST for finding `node`
+ * @param {AST[]} parents - The parents' track when traversing AST for finding `node`
+ */
+
+/**
+ * @public
+ * @typedef {{}} DetectTextOptions
+ * @extends DetectOptions
+ * @param {boolean} [ast=true]  - Should returns `ast`
+ * @param {boolean} [text=true] - Should returns `text`
+ * @param {string} style      - Injecting style in changed node, e.g: `color: red;`
+ * @param {string} [className='detected-updated'] - Injecting class in changed node
+ */
+
+/**
+ * @public
+ * @typedef {{}} DetectMarkdownOptions
+ * @extends DetectTextOptions
+ * @param {'html'|'ast'} [wrapType='html']
+ *  Type of wrapping changed node. <br/>
+ *  1. `html`: Wrapped by html element.  e.g. `# updated` be wrapped as `<p class="detected-updated">\n\n# updated\n\n</p>` <br/>
+ *  2. `ast`:  Wrapped by ast. It's not perceptible in `text`, the effects are work on `ast`
+ * @param {string} [wrapTag='p'] - The wrapped tagName when `wrapType` is `'html'`
+ * @example
+ * const { detectMarkdown } = require('detect-one-changed')
+ *
+ * detectMarkdown('# old', '# new').text
+ * // => '<p class="detected-updated" style="">\n\n# new\n\n</p>\n'
+ *
+ * @example
+ * const { detectMarkdown } = require('detect-one-changed')
+ * const remark = require('remark')
+ * const html = require('remark-html')
+ *
+ * remark().use(html).stringify(detectMarkdown('# old', '# new', { wrapType: 'ast' }).ast)
+ * // => '<h1 class="detected-updated">new</h1>\n'
+ */
+
+/**
+ * @public
+ * @typedef {{}} DetectResult
+ * @param {string} text
+ * @param {AST} ast - Be Injected `className` and `style`'s AST
+ * @param {DetectedState} state
+ * @param {AST} node - Real updated AST node
+ */
 
 module.exports = {
   detectAst,
