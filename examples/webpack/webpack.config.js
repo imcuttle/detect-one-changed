@@ -155,7 +155,7 @@ if (process.env.NODE_ENV === 'production') {
     getWebpackConfig(Object.assign({ prod: false, hot: true }, mdAstOpts))
   ]
 
-  console.log(`HTML HMR http://localhost:${10001}/markdown-ast.html`)
+  console.log(`Markdown AST HMR http://localhost:${10001}/markdown-ast.html`)
   console.log(`Markdown HMR http://localhost:${10001}/markdown.html`)
   console.log(`HTML HMR http://localhost:${10001}/html.html`)
 }

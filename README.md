@@ -9,6 +9,8 @@
 
 > Detect first changed html and markdown between old text and new
 
+![](https://i.loli.net/2018/10/28/5bd58a95c6b7d.gif)
+
 [Live Demo](https://imcuttle.github.io/detect-one-changed/)
 
 ## Table of Contents
@@ -63,21 +65,49 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 
 ### Use it as webpack loader
 
-More information please see [webpack example](./examples/webpack)
+More information please see [loader's document](./docs/loader.md) and [webpack example](./examples/webpack)
 
 - Step one: (`webpack.config.js`)
 
-```javascript
-process.env.NODE_ENV !== 'production'
-// ...
-   module: {
-     rules: [{
-        test: /\.css$/,
-        use:
-     }]
-   }
-// ...
-```
+  ```javascript
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.md$/,
+        use: [
+          process.env.NODE_ENV !== 'production' && {
+            name: 'detect-one-changed/md-loader',
+            options: { returnType: 'text' }
+          }
+          // { name: 'some-md-to-html-loader' },
+        ].filter(Boolean)
+      }
+    ]
+  }
+  // ...
+  ```
+
+- Step two (set up HMR in browser)
+
+  ```javascript
+  function start() {
+    document.querySelector('.markdown-body').innerHTML = require('./path/to/some.md')
+  }
+
+  if (module.hot) {
+    module.hot.accept('./path/to/some.md', () => {
+      require('!style-loader!css-loader!detect-one-changed/style.css')
+      start()
+
+      const node = document.querySelector('.detected-updated')
+      if (node) {
+        // Scroll to updated node
+        node.scrollIntoView({ behavior: 'smooth' })
+      }
+    })
+  }
+  ```
 
 ## API
 
