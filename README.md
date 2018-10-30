@@ -35,8 +35,8 @@ yarn add detect-one-changed
 ```javascript
 const { detectMarkdown } = require('detect-one-changed')
 
-detectMarkdown('# old', '# new').text
-// => '<p class="detected-updated" style="">\n\n# new\n\n</p>\n'
+detectMarkdown('abcd\n\n# old', 'abcd\n\n# new').text
+// => 'abcd\n\n<p class="detected-updated" style="">\n\n# new\n\n</p>\n'
 ```
 
 ```javascript
@@ -46,8 +46,8 @@ const html = require('remark-html')
 
 remark()
   .use(html)
-  .stringify(detectMarkdown('# old', '# new', { wrapType: 'ast' }).ast)
-// => '<h1 class="detected-updated">new</h1>\n'
+  .stringify(detectMarkdown('abcd\n\n# old', 'abcd\n\n# new', { wrapType: 'ast' }).ast)
+// => '<p>abcd</p>\n<h1 class="detected-updated">new</h1>\n'
 ```
 
 ```javascript
