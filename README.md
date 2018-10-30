@@ -63,10 +63,6 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 
 More information please see [webpack example](./examples/webpack)
 
-```
-const
-```
-
 ## API
 
 [See API](./docs/api.md)
