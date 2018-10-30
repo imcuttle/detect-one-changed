@@ -9,6 +9,7 @@ node_js:
 jobs:
   include:
     - stage: Document deploy
+      node_js: 9
       allow_failure: true
       script: npm run build:browser
       deploy:
@@ -20,6 +21,7 @@ jobs:
         local_dir: public
 
     - stage: Test
+      node_js: 9
       before_script: npm install codecov
       script: npm test -- --coverage
       after_script: codecov --token=$CODECOV_TOKEN
