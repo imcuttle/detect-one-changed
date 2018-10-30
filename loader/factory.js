@@ -7,8 +7,6 @@
 const loaderUtils = require('loader-utils')
 
 function factory(detectFn) {
-  const fileContents = new Map()
-
   function webpackLoader(input) {
     const { resourcePath, hot } = this
     const isDisabled = process.env.NODE_ENV === 'production' // || !hot
@@ -32,6 +30,7 @@ function factory(detectFn) {
     }
   }
 
+  const fileContents = (webpackLoader.fileContents = new Map())
   return webpackLoader
 }
 

@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="//unpkg.com/github-markdown-css">
   <link rel="stylesheet" href="//unpkg.com/highlight.js/styles/github.css">
   <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
     .container {
       display: flex;
     }
@@ -15,19 +19,41 @@
       position: relative;
     }
     .fixed-body {
-      height: 100%;
       width: 50%;
       position: fixed;
+      left: 10px;
+      top: 5px;
+      bottom: 5px;
     }
     textarea {
-      position: absolute;
       font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
       font-size: 15px;
-      width: 90%;
-      margin-top: 10px;
-      height: 95%;
+      width: 92%;
+      position: absolute;
+      top: 30px;
+      bottom: 0;
+    }
+    textarea:focus {
+      outline: none;
+    }
+    .btns {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    .btns * {
+      margin-right: 10px;
+    }
+    .btns button {
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+    .btns button:active, .btns button:focus {
+      outline: none;
     }
     .markdown-body {
+      padding-top: 10px;
+      padding-bottom: 10px;
       flex: 1;
       width: 50%;
     }
@@ -36,7 +62,15 @@
 <body>
   <div class="container">
     <div class="input-body">
-      <div class="fixed-body"><textarea></textarea></div>
+      <div class="fixed-body">
+        <div class="btns">
+          <strong id="version"></strong>
+          <button id="new-issue">report issue</button>
+          <button id="copy-link">copy link</button>
+          <a href="https://github.com/imcuttle/detect-one-changed">GitHub</a>
+        </div>
+        <textarea></textarea>
+      </div>
     </div>
     <div class="markdown-body">
     </div>
