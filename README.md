@@ -9,6 +9,8 @@
 
 > Detect first changed html and markdown between old text and new
 
+[Live Demo](https://imcuttle.github.io/detect-one-changed/)
+
 ## Table of Contents
 
 <!-- toc -->
@@ -62,6 +64,20 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 ### Use it as webpack loader
 
 More information please see [webpack example](./examples/webpack)
+
+- Step one: (`webpack.config.js`)
+
+```javascript
+process.env.NODE_ENV !== 'production'
+// ...
+   module: {
+     rules: [{
+        test: /\.css$/,
+        use:
+     }]
+   }
+// ...
+```
 
 ## API
 
