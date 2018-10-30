@@ -13,16 +13,31 @@
 
 <!-- toc -->
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [API](#api)
-- [Contributing](#contributing)
-- [Authors](#authors)
-- [License](#license)
+- dsdsssxxwwssssssssxx
+- wwwsswwwwsssssssssww
+- [Instaation](#installatison)
+- ssww**Usxage**ssssssxx
+- [API](#api)xx
+- [Contributings](#xcontributing)
+- [Author](#authors)sww
+  - [Author](#authors)xxwssss
+    - Authorsxxwws x ss ssss  
+      [Author](#authors) xxwsssssww
+- [Licenswwe](#xlicensxe)
+
+sdsdsddddssd
 
 <!-- tocstop -->
 
-## Installation
+### xxsssssww
+
+sxxssx [sswwx![xssssww](https://i.loli.net/2018/10/30/5bd837100d978.png)](https://ssxs) ww
+
+![xsssswxw](https://i.loli.net/2018/10/30/5bd837100d978.png)
+
+说说 说说 xx ![wwwxxww是wxxw](https://i.loli.net/2018/10/30/5bd837100d978.png) ww
+
+## Installationxxssww
 
 ```bash
 npm install detect-one-changed
@@ -30,9 +45,11 @@ npm install detect-one-changed
 yarn add detect-one-changed
 ```
 
-## Usage
+| name | xxxx      | comments |
+| ---- | --------- | -------- |
+| wdw  | dssesssxx | wwwwwwww |
 
-### Use it as an package
+## Usage
 
 ```javascript
 const { detectMarkdown } = require('detect-one-changed')
@@ -57,14 +74,6 @@ const { detectHtml } = require('detect-one-changed')
 
 detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 // => '<p class="detected-updated new-cls">new</p>'
-```
-
-### Use it as webpack loader
-
-More information please see [webpack example](./examples/webpack)
-
-```
-const
 ```
 
 ## API

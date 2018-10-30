@@ -1,4 +1,4 @@
-# detect-one-changed
+# detect-one-changeds
 
 [![Build status](https://img.shields.io/travis/imcuttle/detect-one-changed/master.svg?style=flat-square)](https://travis-ci.org/imcuttle/detect-one-changed)
 [![Test coverage](https://img.shields.io/codecov/c/github/imcuttle/detect-one-changed.svg?style=flat-square)](https://codecov.io/github/imcuttle/detect-one-changed?branch=master)
@@ -13,14 +13,29 @@
 
 <!-- toc -->
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [API](#api)
-- [Contributing](#contributing)
-- [Authors](#authors)
-- [License](#license)
+- dsdsssxxwwssssssssxx
+- wwwsswwwwssssssssswwssss
+- [Instaation](#installatison)
+- ssww**Usxagess**ssxxs
+- [API](#api)xxssswwww
+- [Contributings](#xcontributing)
+- [Author](#authors)sww
+  - [Author](#authors)xxwssss
+    - Authowws x ss ssss  
+      [Author](#authors) xxwsssssww
+- [Licenswwe](#xlicensxe)
+
+sdsdsddddssd
 
 <!-- tocstop -->
+
+### xxsssssww
+
+sxxssx [sswwxss![xssssww](https://i.loli.net/2018/10/30/5bd837100d978.png)](https://ssxs) ww
+
+![xsw](https://i.loli.net/2018/10/30/5bd837100d978.png)
+
+说说 ![wwwxxww是wxxw](https://i.loli.net/2018/10/30/5bd837100d978.png)
 
 ## Installation
 
@@ -30,9 +45,11 @@ npm install detect-one-changed
 yarn add detect-one-changed
 ```
 
-## Usage
+| name | xxxx        | comments |
+| ---- | ----------- | -------- |
+| wdw  | dssesssssxx | wwwwwwww |
 
-### Use it as an package
+## Usage
 
 ```javascript
 const { detectMarkdown } = require('detect-one-changed')
@@ -57,14 +74,6 @@ const { detectHtml } = require('detect-one-changed')
 
 detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 // => '<p class="detected-updated new-cls">new</p>'
-```
-
-### Use it as webpack loader
-
-More information please see [webpack example](./examples/webpack)
-
-```
-const
 ```
 
 ## API

@@ -1,11 +1,13 @@
 .idea/
 .DS_Store
 node_modules/
-dist/
 public/
 **/*debug.log
 coverage/
 .entry
 .dist
 .vscode
-/style.css
+examples/
+__tests__/
+
+postcss.config.js

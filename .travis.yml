@@ -6,16 +6,20 @@ node_js:
   - 8
   - stable
 
-cache:
-  bundle: true
-  directories:
-    - node_modules
+jobs:
+  include:
+    - stage: Document deploy
+      allow_failure: true
+      script: npm run build:browser
+      deploy:
+        edge:
+          branch: v1.8.47
+        provider: pages
+        skip_cleanup: true
+        github_token: ${GH_TOKEN} # Set in travis-ci.org dashboard
+        local_dir: public
 
-#install:
-# - npm install
-
-script:
-  - npm test -- --coverage
-after_script:
-  - npm install codecov --no-save
-  - codecov --token=$CODECOV_TOKEN
+    - stage: Test
+      before_script: npm install codecov
+      script: npm test -- --coverage
+      after_script: codecov --token=$CODECOV_TOKEN

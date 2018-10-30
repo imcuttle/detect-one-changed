@@ -1,0 +1,13 @@
+@keyframes bling {
+  from {
+    background-color: #d9edf7;
+  }
+  to {
+    background-color: #d9edf7;
+  }
+}
+
+.detected-updated,
+.detected-updated pre {
+  animation: bling 2.5s 1;
+}

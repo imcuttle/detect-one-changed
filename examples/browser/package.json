@@ -1,0 +1,10 @@
+{
+  "name": "webpack",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "../../node_modules/.bin/webpack-dev-server --port 10002 --hot",
+    "build": "../../node_modules/.bin/rimraf ../../public && NODE_ENV=production ../../node_modules/.bin/webpack -p"
+  },
+  "dependencies": {}
+}

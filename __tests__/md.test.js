@@ -36,11 +36,11 @@ describe('md-detect-changed', function() {
     expect(runDetect('normal').text).toMatchInlineSnapshot(`
 "# readme
 
-<p class=\\"detected-updated\\" style=\\"\\">
+<div class=\\"detected-updated\\" style=\\"\\">
 
 okkkk changed here
 
-</p>
+</div>
 
 # Readme 2
 
@@ -168,11 +168,11 @@ fooo
 
   it('should md-detect-changed works diff-total', () => {
     expect(runDetect('diff-total').text).toMatchInlineSnapshot(`
-"<p class=\\"detected-updated\\" style=\\"\\">
+"<div class=\\"detected-updated\\" style=\\"\\">
 
 readme
 
-</p>
+</div>
 
 fooo
 "
@@ -208,9 +208,9 @@ fooo
     expect(runDetect('diff-list').text).toMatchInlineSnapshot(`
 "readme
 
--   <p class=\\"detected-updated\\" style=\\"\\">
+-   <div class=\\"detected-updated\\" style=\\"\\">
     fooo
-    </p>
+    </div>
 
 asdasd
 "
@@ -233,9 +233,9 @@ asdasd
 "# readme
 
 -   fooo
--   <p class=\\"detected-updated\\" style=\\"abc\\">
+-   <div class=\\"detected-updated\\" style=\\"abc\\">
     new
-    </p>
+    </div>
 "
 `)
   })
@@ -255,9 +255,9 @@ asdasd
     expect(runDetect('diff-rm-list').text).toMatchInlineSnapshot(`
 "# readme
 
--   <p class=\\"detected-updated\\" style=\\"\\">
+-   <div class=\\"detected-updated\\" style=\\"\\">
     fooo
-    </p>
+    </div>
 "
 `)
   })
@@ -272,17 +272,32 @@ asdasd
 `)
   })
 
+  it('should diff-code', function() {
+    expect(runDetect('diff-code').text).toMatchInlineSnapshot(`
+"code
+
+<div class=\\"detected-updated\\" style=\\"\\">
+
+\`\`\`javascript
+hello
+\`\`\`
+
+</div>
+"
+`)
+  })
+
   it('should diff-rm-head', function() {
     expect(runDetect('diff-rm-head').text).toMatchInlineSnapshot(`
 "# readme
 
 block block1
 
-<p class=\\"detected-updated\\" style=\\"\\">
+<div class=\\"detected-updated\\" style=\\"\\">
 
 block block2
 
-</p>
+</div>
 "
 `)
   })
@@ -292,6 +307,38 @@ block block2
 "<h1>readme</h1>
 <p>block block1</p>
 <p class=\\"detected-updated\\">block block2</p>
+"
+`)
+  })
+
+  it('should tight-list', function() {
+    expect(runDetect('tight-list').text).toMatchInlineSnapshot(`
+"-   [Installation](#installation)
+-   [Usage](#usage)
+-   [API](#api)
+-   [Contributing](#contributing)
+-   <div class=\\"detected-updated\\" style=\\"\\">
+
+    [Authorsx](#authors)
+    </div>
+-   [License](#license)
+"
+`)
+  })
+
+  it('should nested-list', function() {
+    expect(runDetect('nested-list').text).toMatchInlineSnapshot(`
+"-   [Installation](#installation)
+-   [Usage](#usage)
+-   [API](#api)
+-   [Contributing](#contributing)
+-   <div class=\\"detected-updated\\" style=\\"\\">
+
+    [Author-new](#authors)
+    </div>
+
+    -   child
+-   [License](#license)
 "
 `)
   })

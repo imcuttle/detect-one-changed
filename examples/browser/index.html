@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Webpack Markdown Demo</title>
+  <link rel="stylesheet" href="//unpkg.com/github-markdown-css">
+  <link rel="stylesheet" href="//unpkg.com/highlight.js/styles/github.css">
+  <style>
+    .container {
+      display: flex;
+    }
+    .input-body {
+      flex: 1;
+      display: flex;
+      position: relative;
+    }
+    .fixed-body {
+      height: 100%;
+      width: 50%;
+      position: fixed;
+    }
+    textarea {
+      position: absolute;
+      font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+      font-size: 15px;
+      width: 90%;
+      margin-top: 10px;
+      height: 95%;
+    }
+    .markdown-body {
+      flex: 1;
+      width: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="input-body">
+      <div class="fixed-body"><textarea></textarea></div>
+    </div>
+    <div class="markdown-body">
+    </div>
+  </div>
+</body>
+</html>
