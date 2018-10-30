@@ -30,7 +30,14 @@
     "detect",
     "one",
     "changed",
-    "detect-one-changed"
+    "detect-one-changed",
+    "markdown",
+    "html",
+    "diff",
+    "preview",
+    "hmr",
+    "highlight",
+    "hot"
   ],
   "typings": "index.d.ts",
   "license": "MIT",
