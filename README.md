@@ -61,6 +61,10 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 
 [See API](./docs/api.md)
 
+## Related
+
+- [live-markd](https://github.com/imcuttle/live-markd) - 📝Github Favorite Markdown preview with live rendering & location and highlight changed block.
+
 ## Contributing
 
 - Fork it!
