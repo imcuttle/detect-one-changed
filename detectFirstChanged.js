@@ -8,6 +8,7 @@ const walk = require('@moyuyc/walk-tree')
 const isEqWith = require('lodash.isequalwith')
 const createCachedChildGetter = require('./createCachedChildGetter')
 
+// istanbul ignore next
 const getPrePaths = (context, ast) => {
   const { top, xs } = context.cursor.stack
   return xs.slice(0, top + 1).reduce(

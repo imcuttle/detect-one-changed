@@ -17,6 +17,7 @@ function createCachedChildGetter(ast = {}, dp) {
 
           ref = ref.children[index]
           key += index
+          // istanbul ignore next if
           dp && (dp[key] = ref)
           continue
         }
@@ -26,6 +27,7 @@ function createCachedChildGetter(ast = {}, dp) {
       return { ref }
     }
 
+    // istanbul ignore next if
     if (dp) {
       const pathKey = paths.join('')
       let newPaths = paths.slice()
