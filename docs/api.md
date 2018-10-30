@@ -14,15 +14,15 @@
 - [AST](#ast)
 - [DetectResult](#detectresult)
   - [Parameters](#parameters-3)
-- [DetectMarkdownOptions](#detectmarkdownoptions)
-  - [Parameters](#parameters-4)
-  - [Examples](#examples-1)
 - [DetectOptions](#detectoptions)
-  - [Parameters](#parameters-5)
+  - [Parameters](#parameters-4)
 - [DetectedState](#detectedstate)
-  - [Parameters](#parameters-6)
+  - [Parameters](#parameters-5)
 - [DetectTextOptions](#detecttextoptions)
+  - [Parameters](#parameters-6)
+- [DetectMarkdownOptions](#detectmarkdownoptions)
   - [Parameters](#parameters-7)
+  - [Examples](#examples-1)
 
 ### detectAst
 
@@ -46,7 +46,7 @@ Detect markdown updating
 - `oldMarkdown` **([AST](#ast) \| [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))**
 - `newMarkdown` **([AST](#ast) \| [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))**
 - `options` **[DetectMarkdownOptions](#detectmarkdownoptions)** (optional, default `{}`)
-  - `options.wrapTag` (optional, default `'p'`)
+  - `options.wrapTag` (optional, default `'div'`)
   - `options.wrapType` (optional, default `'html'`)
   - `options.ast` (optional, default `true`)
   - `options.text` (optional, default `true`)
@@ -102,39 +102,6 @@ Type: {}
 - `state` **[DetectedState](#detectedstate)**
 - `node` **[AST](#ast)** Real updated AST node
 
-### DetectMarkdownOptions
-
-**Extends DetectTextOptions**
-
-Type: {}
-
-#### Parameters
-
-- `wrapType` **(`"html"` \| `"ast"`)** Type of wrapping changed node. <br/>
-  1\. `html`: Wrapped by html element. e.g. `# updated` be wrapped as `<p class="detected-updated">\n\n# updated\n\n</p>` <br/>
-  2\. `ast`: Wrapped by ast. It's not perceptible in `text`, the effects are work on `ast` (optional, default `'html'`)
-- `wrapTag` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The wrapped tagName when `wrapType` is `'html'` (optional, default `'p'`)
-
-#### Examples
-
-```javascript
-const { detectMarkdown } = require('detect-one-changed')
-
-detectMarkdown('# old', '# new').text
-// => '<p class="detected-updated" style="">\n\n# new\n\n</p>\n'
-```
-
-```javascript
-const { detectMarkdown } = require('detect-one-changed')
-const remark = require('remark')
-const html = require('remark-html')
-
-remark()
-  .use(html)
-  .stringify(detectMarkdown('# old', '# new', { wrapType: 'ast' }).ast)
-// => '<h1 class="detected-updated">new</h1>\n'
-```
-
 ### DetectOptions
 
 Type: {}
@@ -165,3 +132,36 @@ Type: {}
 - `text` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should returns `text` (optional, default `true`)
 - `style` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting style in changed node, e.g: `color: red;`
 - `className` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting class in changed node (optional, default `'detected-updated'`)
+
+### DetectMarkdownOptions
+
+**Extends DetectTextOptions**
+
+Type: {}
+
+#### Parameters
+
+- `wrapType` **(`"html"` \| `"ast"`)** Type of wrapping changed node. <br/>
+  1\. `html`: Wrapped by html element. e.g. `# updated` be wrapped as `<p class="detected-updated">\n\n# updated\n\n</p>` <br/>
+  2\. `ast`: Wrapped by ast. It's not perceptible in `text`, the effects are work on `ast` (optional, default `'html'`)
+- `wrapTag` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The wrapped tagName when `wrapType` is `'html'` (optional, default `'div'`)
+
+#### Examples
+
+```javascript
+const { detectMarkdown } = require('detect-one-changed')
+
+detectMarkdown('# old', '# new').text
+// => '<p class="detected-updated" style="">\n\n# new\n\n</p>\n'
+```
+
+```javascript
+const { detectMarkdown } = require('detect-one-changed')
+const remark = require('remark')
+const html = require('remark-html')
+
+remark()
+  .use(html)
+  .stringify(detectMarkdown('# old', '# new', { wrapType: 'ast' }).ast)
+// => '<h1 class="detected-updated">new</h1>\n'
+```

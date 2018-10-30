@@ -20,6 +20,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [API](#api)
+- [Related](#related)
 - [Contributing](#contributing)
 - [Authors](#authors)
 - [License](#license)
