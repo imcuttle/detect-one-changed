@@ -7,7 +7,7 @@
 [![Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=flat-square)](https://conventionalcommits.org)
 
-> Detect first changed html and markdown between old text and new
+> Detect first changed html and markdown between old text and the new
 
 ![](https://i.loli.net/2018/10/28/5bd58a95c6b7d.gif)
 
