@@ -11,7 +11,9 @@
 - [detectHtml](#detecthtml)
   - [Parameters](#parameters-2)
   - [Examples](#examples)
+- [Remark](#remark)
 - [AST](#ast)
+- [Rehype](#rehype)
 - [DetectResult](#detectresult)
   - [Parameters](#parameters-3)
 - [DetectOptions](#detectoptions)
@@ -20,8 +22,10 @@
   - [Parameters](#parameters-5)
 - [DetectTextOptions](#detecttextoptions)
   - [Parameters](#parameters-6)
-- [DetectMarkdownOptions](#detectmarkdownoptions)
+- [DetectHtmlOptions](#detecthtmloptions)
   - [Parameters](#parameters-7)
+- [DetectMarkdownOptions](#detectmarkdownoptions)
+  - [Parameters](#parameters-8)
   - [Examples](#examples-1)
 
 ### detectAst
@@ -54,6 +58,7 @@ Detect markdown updating
   - `options.style` (optional, default `''`)
   - `options.className` (optional, default `'detected-updated'`)
   - `options.position` (optional, default `true`)
+  - `options.remark` (optional, default `require('remark')()`)
 
 Returns **any** DetectResult
 
@@ -65,13 +70,14 @@ Detect html updating
 
 - `oldHtml` **([AST](#ast) \| [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))**
 - `newHtml` **([AST](#ast) \| [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String))**
-- `options` **[DetectTextOptions](#detecttextoptions)** (optional, default `{}`)
+- `options` **[DetectHtmlOptions](#detecthtmloptions)** (optional, default `{}`)
   - `options.ast` (optional, default `true`)
   - `options.text` (optional, default `true`)
   - `options.reverse` (optional, default `true`)
   - `options.position` (optional, default `true`)
   - `options.style` (optional, default `''`)
   - `options.className` (optional, default `'detected-updated'`)
+  - `options.rehype` (optional, default `require('rehype')()`)
 
 #### Examples
 
@@ -84,12 +90,24 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 
 Returns **[DetectResult](#detectresult)**
 
+### Remark
+
+- **See: [remark](https://github.com/remarkjs/remark) - Markdown processor powered by plugins**
+
+Type: {}
+
 ### AST
 
 - **See: [Markdown AST](https://github.com/syntax-tree/mdast)**
 - **See: [HTML AST](https://github.com/syntax-tree/hast)**
 - **See: [remark](https://github.com/remarkjs/remark) - Markdown processor on MDAST**
 - **See: [rehype](https://github.com/rehypejs/rehype) - Markdown processor on HAST**
+
+Type: {}
+
+### Rehype
+
+- **See: [rehype](https://github.com/rehypejs/rehype) - HTML processor powered by plugins**
 
 Type: {}
 
@@ -136,6 +154,16 @@ Type: {}
 - `position` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should AST's node carry with position information. (optional, default `true`)
 - `className` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting class in changed node (optional, default `'detected-updated'`)
 
+### DetectHtmlOptions
+
+**Extends DetectTextOptions**
+
+Type: {}
+
+#### Parameters
+
+- `rehype` **[Rehype](#rehype)** a Rehype instance (for parsing string to HAST) (optional, default `require('rehype')()`)
+
 ### DetectMarkdownOptions
 
 **Extends DetectTextOptions**
@@ -144,6 +172,7 @@ Type: {}
 
 #### Parameters
 
+- `remark` **[Remark](#remark)** a Remark instance (for parsing string to MDAST) (optional, default `require('remark')()`)
 - `wrapType` **(`"html"` \| `"ast"`)** Type of wrapping changed node. <br/>
   1\. `html`: Wrapped by html element. e.g. `# updated` be wrapped as `<p class="detected-updated">\n\n# updated\n\n</p>` <br/>
   2\. `ast`: Wrapped by ast. It's not perceptible in `text`, the effects are work on `ast` (optional, default `'html'`)

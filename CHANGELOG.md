@@ -1,3 +1,11 @@
+<a name="1.2.0"></a>
+
+# [1.2.0](https://github.com/imcuttle/detect-one-changed/compare/v1.1.0...v1.2.0) (2018-10-31)
+
+### Features
+
+- add rehype-plugin and remark-plugin ([106c11c](https://github.com/imcuttle/detect-one-changed/commit/106c11c)), closes [#2](https://github.com/imcuttle/detect-one-changed/issues/2)
+
 <a name="1.1.0"></a>
 
 # [1.1.0](https://github.com/imcuttle/detect-one-changed/compare/v1.0.1...v1.1.0) (2018-10-31)
