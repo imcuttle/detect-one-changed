@@ -66,7 +66,7 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 
 ### Use it as webpack loader
 
-More information please see [loader's document](./docs/loader.md) and [webpack example](./examples/webpack)
+More information please see [loader](./docs/loader.md)'s document and [webpack example](./examples/webpack)
 
 - Step one: (`webpack.config.js`)
 
@@ -115,8 +115,53 @@ More information please see [loader's document](./docs/loader.md) and [webpack e
   ```
 
 - Step three
+
   1. `npm install webpack webpack-dev-server -D`
   2. `webpack-dev-server`
+
+### Use in [MDX](https://github.com/mdx-js/mdx)
+
+- `webpack.config.js`
+  ```javascript
+  ...
+    {
+      use: /\.mdx?$/,
+      loaders: [
+        {
+          name: '@mdx-js/mdx-loader',
+          options: {
+            mdPlugin: [require('detect-one-changed/remark-plugin')]
+          }
+        }
+      ]
+    }
+  ```
+
+* `src/index.js` (entry)
+
+  ```javascript
+  import * as React from 'react'
+  import { render } from 'react-dom'
+
+  function start() {
+    const Markdown = require('./markdown.mdx').default
+    render(<Markdown />, document.querySelector('.markdown-body'))
+  }
+
+  start()
+
+  if (module.hot && process.env.NODE_ENV !== 'production') {
+    module.hot.accept(['./markdown.mdx'], () => {
+      require('!style-loader!css-loader!detect-one-changed/style.css')
+      start()
+
+      const nodeList = document.querySelector('.detected-updated')
+      if (node) {
+        node.scrollIntoView({ behavior: 'smooth' })
+      }
+    })
+  }
+  ```
 
 ## API
 

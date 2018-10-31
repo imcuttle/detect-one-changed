@@ -7,6 +7,21 @@
 
 const { detectMarkdown } = require('./')
 
-module.exports = require('./loader/factory')((oldV, newV, opts = {}) => {
-  return detectMarkdown(oldV, newV, Object.assign({ wrapTag: 'div' }, opts))
-})
+function create() {
+  return require('./loader/webpackFactory')((oldV, newV, opts = {}) => {
+    const detected = detectMarkdown(oldV, newV, Object.assign({ wrapTag: 'div' }, opts))
+    const { returnType = 'all' } = opts || {}
+    switch (returnType) {
+      case 'text':
+        return detected.text
+      case 'ast':
+        return detected.ast
+      case 'all':
+        return detected
+      default:
+        return detected[returnType]
+    }
+  })
+}
+
+module.exports = Object.assign(create(), { create })

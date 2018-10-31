@@ -7,7 +7,7 @@
 ```javascript
 ...
   loaders: [
-    { name: 'detect-one-changed/md-loader' }
+    { name: 'detect-one-changed/md-loader', options: {} }
   ]
 ...
   loaders: [

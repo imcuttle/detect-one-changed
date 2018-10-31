@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mdx - use remark-plugin should mdx diff \`readme\` 1`] = `
+"
+
+export default ({components, ...props}) => <MDXTag name=\\"wrapper\\"  components={components}><MDXTag name=\\"h1\\" components={components}>{\`detect-one-changeds\`}</MDXTag>
+<MDXTag name=\\"h2\\" components={components} props={{\\"className\\":\\"detected-updated\\"}}>{\`Authors - new\`}</MDXTag>
+<MDXTag name=\\"p\\" components={components}>{\`This library is written and maintained by imcuttle, \`}<a href=\\"mailto:moyuyc95@gmail.com\\">{\`moyuyc95@gmail.com\`}</a></MDXTag>
+<MDXTag name=\\"h2\\" components={components}>{\`License\`}</MDXTag>
+<MDXTag name=\\"p\\" components={components}>{\`MIT - \`}<MDXTag name=\\"a\\" components={components} parentName=\\"p\\" props={{\\"href\\":\\"https://github.com/imcuttle\\"}}>{\`imcuttle\`}</MDXTag>{\` 🐟\`}</MDXTag></MDXTag>"
+`;

@@ -3,10 +3,11 @@
 1. Clone this repository
 2. `npm install`
 3. `cd detect-one-changed/examples/webpack`
-4. `npm start`
+4. `npm install && npm start`
 
 ```text
-Markdown AST HMR http://localhost:10001/markdown-ast.html
-Markdown HMR http://localhost:10001/markdown.html
-HTML HMR http://localhost:10001/html.html
+npm start mdx
+npm start markdown-ast
+npm start markdown
+npm start html
 ```

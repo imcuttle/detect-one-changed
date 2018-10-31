@@ -28,6 +28,22 @@ const postcssLoader = {
   }
 }
 
+const babelLoader = {
+  loader: require.resolve('babel-loader'),
+  options: {
+    babelrc: false,
+    presets: [
+      [require.resolve('babel-preset-env'), { targets: { browsers: ['ie 11'] } }],
+      require.resolve('babel-preset-react')
+    ],
+    plugins: [
+      require.resolve('babel-plugin-transform-object-rest-spread'),
+      require.resolve('babel-plugin-syntax-dynamic-import'),
+      require.resolve('babel-plugin-transform-runtime')
+    ]
+  }
+}
+
 function getWebpackConfig({
   name,
   htmlTemplatePath,
@@ -82,28 +98,28 @@ function getWebpackConfig({
         allChunks: true
       }),
       new HtmlWebpackPlugin({
-        filename: name + '.html',
+        filename: 'index.html',
         template: htmlTemplatePath
       })
     ].filter(Boolean),
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
-          exclude: [/node_modules/],
+          test: /\.mdx$/,
           use: [
+            babelLoader,
             {
-              loader: require.resolve('babel-loader'),
+              loader: '@mdx-js/loader',
               options: {
-                babelrc: false,
-                presets: [[require.resolve('babel-preset-env'), { targets: { browsers: ['ie 11'] } }]],
-                plugins: [
-                  require.resolve('babel-plugin-transform-object-rest-spread'),
-                  require.resolve('babel-plugin-transform-runtime')
-                ]
+                mdPlugins: [require('../../remark-plugin')]
               }
             }
           ]
+        },
+        {
+          test: /\.jsx?$/,
+          exclude: [/node_modules/],
+          use: [babelLoader]
         },
         {
           test: /\.css$/,
@@ -128,34 +144,24 @@ function getWebpackConfig({
   }
 }
 
-const mdOpts = {
-  htmlTemplatePath: nps.join(__dirname, 'index.html'),
-  name: 'markdown',
-  entry: require.resolve(nps.join(__dirname, 'markdown'))
+const examples = ['mdx', 'markdown-ast', 'markdown', 'html']
+const type = process.argv[process.argv.length - 1]
+if (process.argv.length === 5) {
+  process.argv.pop()
 }
+const name = examples.includes(type) ? type : examples[0]
 
-const htmlOpts = {
+console.log(`Run example: ${name}`)
+
+const opts = {
   htmlTemplatePath: nps.join(__dirname, 'index.html'),
-  name: 'html',
-  entry: require.resolve(nps.join(__dirname, 'html'))
-}
-
-const mdAstOpts = {
-  name: 'markdown-ast',
-  entry: require.resolve(nps.join(__dirname, 'markdown-ast')),
-  htmlTemplatePath: nps.join(__dirname, 'index.html')
+  name,
+  entry: require.resolve(nps.join(__dirname, name))
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = [getWebpackConfig(htmlOpts), getWebpackConfig(mdOpts), getWebpackConfig(mdAstOpts)]
+  module.exports = getWebpackConfig(opts)
 } else {
-  module.exports = [
-    getWebpackConfig(Object.assign({ prod: false, hot: true }, htmlOpts)),
-    getWebpackConfig(Object.assign({ prod: false, hot: true }, mdOpts)),
-    getWebpackConfig(Object.assign({ prod: false, hot: true }, mdAstOpts))
-  ]
-
-  console.log(`Markdown AST HMR http://localhost:${10001}/markdown-ast.html`)
-  console.log(`Markdown HMR http://localhost:${10001}/markdown.html`)
-  console.log(`HTML HMR http://localhost:${10001}/html.html`)
+  console.log(`open http://localhost:${10001}/`)
+  module.exports = getWebpackConfig(Object.assign({ prod: false, hot: true }, opts))
 }

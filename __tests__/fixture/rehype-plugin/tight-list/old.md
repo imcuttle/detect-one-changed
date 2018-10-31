@@ -1,0 +1,6 @@
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+- [Contributing](#contributing)
+- [Author](#authors)
+- [License](#license)

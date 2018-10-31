@@ -20,9 +20,17 @@ type DetectTextOptions = {
   position?: boolean
   className?: string
 }
+
+type Unified = Function
+
 type DetectMarkdownOptions = DetectTextOptions & {
   wrapType?: 'ast' | 'html'
   wrapTag?: string
+  remark?: Unified
+}
+
+type DetectHtmlOptions = DetectTextOptions & {
+  rehype?: Unified
 }
 type DetectedResult = {
   text?: string
@@ -33,7 +41,7 @@ type DetectedResult = {
 
 declare const detectOneChanged: {
   detectAst: (oldAst: AST, newAst: AST, opt?: DetectOptions) => null | DetectedState
-  detectHtml: (oldHtml: AST | string, newHtml: AST | string, opt?: DetectTextOptions) => DetectedResult
+  detectHtml: (oldHtml: AST | string, newHtml: AST | string, opt?: DetectHtmlOptions) => DetectedResult
   detectMarkdown: (oldMarkdown: AST | string, oldMarkdown: AST | string, opt?: DetectMarkdownOptions) => DetectedResult
 }
 

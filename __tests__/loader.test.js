@@ -9,7 +9,7 @@ const fs = require('fs')
 const nps = require('path')
 const compiler = require('./compiler')
 const { fixture } = require('./helper')
-const { fileContents } = require('../md-loader')
+const { cache: fileContents } = require('../md-loader')
 
 const read = name => fs.readFileSync(fixture(name), { encoding: 'utf8' })
 
