@@ -53,6 +53,7 @@ Detect markdown updating
   - `options.reverse` (optional, default `true`)
   - `options.style` (optional, default `''`)
   - `options.className` (optional, default `'detected-updated'`)
+  - `options.position` (optional, default `true`)
 
 Returns **any** DetectResult
 
@@ -68,6 +69,7 @@ Detect html updating
   - `options.ast` (optional, default `true`)
   - `options.text` (optional, default `true`)
   - `options.reverse` (optional, default `true`)
+  - `options.position` (optional, default `true`)
   - `options.style` (optional, default `''`)
   - `options.className` (optional, default `'detected-updated'`)
 
@@ -131,6 +133,7 @@ Type: {}
 - `ast` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should returns `ast` (optional, default `true`)
 - `text` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should returns `text` (optional, default `true`)
 - `style` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting style in changed node, e.g: `color: red;`
+- `position` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should AST's node carry with position information. (optional, default `true`)
 - `className` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting class in changed node (optional, default `'detected-updated'`)
 
 ### DetectMarkdownOptions

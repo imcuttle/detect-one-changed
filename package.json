@@ -1,6 +1,6 @@
 {
   "name": "detect-one-changed",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "description": "Detect first changed html and markdown between old text and new",
   "author": "imcuttle <moyuyc95@gmail.com>",
