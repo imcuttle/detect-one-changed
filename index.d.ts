@@ -17,10 +17,11 @@ type DetectTextOptions = {
   ast?: boolean
   text?: boolean
   style?: string
+  position?: boolean
   className?: string
 }
 type DetectMarkdownOptions = DetectTextOptions & {
-  wrapType?: string
+  wrapType?: 'ast' | 'html'
   wrapTag?: string
 }
 type DetectedResult = {

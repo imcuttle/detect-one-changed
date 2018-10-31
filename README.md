@@ -72,6 +72,9 @@ More information please see [loader's document](./docs/loader.md) and [webpack e
 
   ```javascript
   // ...
+  devServer: {
+    hot: true
+  },
   module: {
     rules: [
       {
@@ -98,10 +101,11 @@ More information please see [loader's document](./docs/loader.md) and [webpack e
 
   if (module.hot) {
     module.hot.accept('./path/to/some.md', () => {
+      // Injects highlight css text in <style/>
       require('!style-loader!css-loader!detect-one-changed/style.css')
       start()
 
-      const node = document.querySelector('.detected-updated')
+      const node = document.querySelector('.markdown-body .detected-updated')
       if (node) {
         // Scroll to updated node
         node.scrollIntoView({ behavior: 'smooth' })
@@ -109,6 +113,10 @@ More information please see [loader's document](./docs/loader.md) and [webpack e
     })
   }
   ```
+
+- Step three
+  1. `npm install webpack webpack-dev-server -D`
+  2. `webpack-dev-server`
 
 ## API
 

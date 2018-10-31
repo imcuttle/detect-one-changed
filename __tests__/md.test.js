@@ -342,6 +342,11 @@ block block2
 "
 `)
   })
+
+  it('should nested-list `with position = false`', function() {
+    expect(runDetect('nested-list', { position: false }).node.position).toBeUndefined()
+    expect(runDetect('nested-list', { position: true }).node.position).not.toBeUndefined()
+  })
 })
 
 describe('gfm-preset', () => {

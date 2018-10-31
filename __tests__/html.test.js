@@ -53,4 +53,9 @@ describe('html-detect-changed', function() {
 "
 `)
   })
+
+  it('append-cls-style with `position`', () => {
+    expect(runDetect('append-cls-style', { position: true }).node.position).not.toBeUndefined()
+    expect(runDetect('append-cls-style', { position: false }).node.position).toBeUndefined()
+  })
 })
