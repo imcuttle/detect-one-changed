@@ -11,22 +11,24 @@
 - [detectHtml](#detecthtml)
   - [Parameters](#parameters-2)
   - [Examples](#examples)
-- [Rehype](#rehype)
 - [DetectResult](#detectresult)
   - [Parameters](#parameters-3)
-- [AST](#ast)
 - [DetectMarkdownOptions](#detectmarkdownoptions)
   - [Parameters](#parameters-4)
   - [Examples](#examples-1)
+- [Rehype](#rehype)
+- [AST](#ast)
+- [DetectHtmlOptions](#detecthtmloptions)
+  - [Parameters](#parameters-5)
 - [Remark](#remark)
 - [DetectOptions](#detectoptions)
-  - [Parameters](#parameters-5)
-- [DetectedState](#detectedstate)
   - [Parameters](#parameters-6)
-- [DetectTextOptions](#detecttextoptions)
+- [DetectedState](#detectedstate)
   - [Parameters](#parameters-7)
-- [DetectHtmlOptions](#detecthtmloptions)
+- [DetectTextOptions](#detecttextoptions)
   - [Parameters](#parameters-8)
+- [reverseAST](#reverseast)
+  - [Parameters](#parameters-9)
 
 ### detectAst
 
@@ -90,12 +92,6 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 
 Returns **[DetectResult](#detectresult)**
 
-### Rehype
-
-- **See: [rehype](https://github.com/rehypejs/rehype) - HTML processor powered by plugins**
-
-Type: {}
-
 ### DetectResult
 
 Type: {}
@@ -106,15 +102,6 @@ Type: {}
 - `ast` **[AST](#ast)** Be Injected `className` and `style`'s AST
 - `state` **[DetectedState](#detectedstate)**
 - `node` **[AST](#ast)** Real updated AST node
-
-### AST
-
-- **See: [Markdown AST](https://github.com/syntax-tree/mdast)**
-- **See: [HTML AST](https://github.com/syntax-tree/hast)**
-- **See: [remark](https://github.com/remarkjs/remark) - Markdown processor on MDAST**
-- **See: [rehype](https://github.com/rehypejs/rehype) - Markdown processor on HAST**
-
-Type: {}
 
 ### DetectMarkdownOptions
 
@@ -149,6 +136,31 @@ remark()
   .stringify(detectMarkdown('# old', '# new', { wrapType: 'ast' }).ast)
 // => '<h1 class="detected-updated">new</h1>\n'
 ```
+
+### Rehype
+
+- **See: [rehype](https://github.com/rehypejs/rehype) - HTML processor powered by plugins**
+
+Type: {}
+
+### AST
+
+- **See: [Markdown AST](https://github.com/syntax-tree/mdast)**
+- **See: [HTML AST](https://github.com/syntax-tree/hast)**
+- **See: [remark](https://github.com/remarkjs/remark) - Markdown processor on MDAST**
+- **See: [rehype](https://github.com/rehypejs/rehype) - Markdown processor on HAST**
+
+Type: {}
+
+### DetectHtmlOptions
+
+**Extends DetectTextOptions**
+
+Type: {}
+
+#### Parameters
+
+- `rehype` **[Rehype](#rehype)** a Rehype instance (for parsing string to HAST) (optional, default `require('rehype')()`)
 
 ### Remark
 
@@ -188,12 +200,12 @@ Type: {}
 - `position` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should AST's node carry with position information. (optional, default `true`)
 - `className` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting class in changed node (optional, default `'detected-updated'`)
 
-### DetectHtmlOptions
+### reverseAST
 
-**Extends DetectTextOptions**
-
-Type: {}
+reverse AST
 
 #### Parameters
 
-- `rehype` **[Rehype](#rehype)** a Rehype instance (for parsing string to HAST) (optional, default `require('rehype')()`)
+- `ast` {AST}
+
+Returns **any** reversedAst {AST}

@@ -40,6 +40,7 @@ type DetectedResult = {
 }
 
 declare const detectOneChanged: {
+  reverseAST: (ast: AST) => AST
   detectAst: (oldAst: AST, newAst: AST, opt?: DetectOptions) => null | DetectedState
   detectHtml: (oldHtml: AST | string, newHtml: AST | string, opt?: DetectHtmlOptions) => DetectedResult
   detectMarkdown: (oldMarkdown: AST | string, oldMarkdown: AST | string, opt?: DetectMarkdownOptions) => DetectedResult
