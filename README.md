@@ -155,7 +155,7 @@ More information please see [loader](./docs/loader.md)'s document and [webpack e
       require('!style-loader!css-loader!detect-one-changed/style.css')
       start()
 
-      const nodeList = document.querySelector('.detected-updated')
+      const node = document.querySelector('.detected-updated')
       if (node) {
         node.scrollIntoView({ behavior: 'smooth' })
       }
