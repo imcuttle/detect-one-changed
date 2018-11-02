@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reverseAST should reverseAST 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "checked": null,
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "checked": null,
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "type": "text",
+                          "value": "Kiyi",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "spread": false,
+                  "type": "listItem",
+                },
+                Object {
+                  "checked": null,
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "type": "text",
+                          "value": "John",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "spread": false,
+                  "type": "listItem",
+                },
+                Object {
+                  "checked": null,
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "checked": null,
+                          "children": Array [
+                            Object {
+                              "children": Array [
+                                Object {
+                                  "type": "text",
+                                  "value": "Kil",
+                                },
+                              ],
+                              "type": "paragraph",
+                            },
+                          ],
+                          "spread": false,
+                          "type": "listItem",
+                        },
+                        Object {
+                          "checked": null,
+                          "children": Array [
+                            Object {
+                              "children": Array [
+                                Object {
+                                  "type": "text",
+                                  "value": "July",
+                                },
+                              ],
+                              "type": "paragraph",
+                            },
+                          ],
+                          "spread": false,
+                          "type": "listItem",
+                        },
+                      ],
+                      "ordered": false,
+                      "spread": false,
+                      "start": null,
+                      "type": "list",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "type": "text",
+                          "value": "Bob",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "spread": false,
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "spread": false,
+              "start": null,
+              "type": "list",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "Mother",
+                },
+              ],
+              "type": "paragraph",
+            },
+          ],
+          "spread": false,
+          "type": "listItem",
+        },
+        Object {
+          "checked": null,
+          "children": Array [
+            Object {
+              "children": Array [
+                Object {
+                  "checked": null,
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "type": "text",
+                          "value": "Kiyi",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "spread": false,
+                  "type": "listItem",
+                },
+                Object {
+                  "checked": null,
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "type": "text",
+                          "value": "John",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "spread": false,
+                  "type": "listItem",
+                },
+                Object {
+                  "checked": null,
+                  "children": Array [
+                    Object {
+                      "children": Array [
+                        Object {
+                          "checked": null,
+                          "children": Array [
+                            Object {
+                              "children": Array [
+                                Object {
+                                  "type": "text",
+                                  "value": "July",
+                                },
+                              ],
+                              "type": "paragraph",
+                            },
+                          ],
+                          "spread": false,
+                          "type": "listItem",
+                        },
+                      ],
+                      "ordered": false,
+                      "spread": false,
+                      "start": null,
+                      "type": "list",
+                    },
+                    Object {
+                      "children": Array [
+                        Object {
+                          "type": "text",
+                          "value": "Bob",
+                        },
+                      ],
+                      "type": "paragraph",
+                    },
+                  ],
+                  "spread": false,
+                  "type": "listItem",
+                },
+              ],
+              "ordered": false,
+              "spread": false,
+              "start": null,
+              "type": "list",
+            },
+            Object {
+              "children": Array [
+                Object {
+                  "type": "text",
+                  "value": "Father",
+                },
+              ],
+              "type": "paragraph",
+            },
+          ],
+          "spread": false,
+          "type": "listItem",
+        },
+      ],
+      "ordered": false,
+      "spread": true,
+      "start": null,
+      "type": "list",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "type": "text",
+          "value": "Root",
+        },
+      ],
+      "depth": 1,
+      "type": "heading",
+    },
+  ],
+  "type": "root",
+}
+`;

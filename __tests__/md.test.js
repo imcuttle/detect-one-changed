@@ -327,7 +327,7 @@ block block2
   })
 
   it('should nested-list', function() {
-    expect(runDetect('nested-list').text).toMatchInlineSnapshot(`
+    expect(runDetect('nested-list', { position: false }).text).toMatchInlineSnapshot(`
 "-   [Installation](#installation)
 -   [Usage](#usage)
 -   [API](#api)
