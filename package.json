@@ -11,7 +11,7 @@
     "prepare": "npm run build:css",
     "prepublishOnly": "npm test",
     "toc": "markdown-toc --maxdepth=2 -i README.md && git add README.md",
-    "doc": "documentation --markdown-toc=true --readme-file=docs/api.md readme index.js -a public -s \"API\" && git add docs/api.md",
+    "doc": "documentation --markdown-toc=true -q --readme-file=docs/api.md readme index.js -a public -s \"API\" && prettier docs/api.md --write && git add docs/api.md",
     "version": "npm run doc && npm run toc && npm run changelog",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
