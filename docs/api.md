@@ -11,22 +11,22 @@
 - [detectHtml](#detecthtml)
   - [Parameters](#parameters-2)
   - [Examples](#examples)
+- [Remark](#remark)
+- [AST](#ast)
+- [Rehype](#rehype)
 - [DetectResult](#detectresult)
   - [Parameters](#parameters-3)
-- [DetectMarkdownOptions](#detectmarkdownoptions)
-  - [Parameters](#parameters-4)
-  - [Examples](#examples-1)
-- [Rehype](#rehype)
-- [AST](#ast)
-- [DetectHtmlOptions](#detecthtmloptions)
-  - [Parameters](#parameters-5)
-- [Remark](#remark)
 - [DetectOptions](#detectoptions)
-  - [Parameters](#parameters-6)
+  - [Parameters](#parameters-4)
 - [DetectedState](#detectedstate)
-  - [Parameters](#parameters-7)
+  - [Parameters](#parameters-5)
 - [DetectTextOptions](#detecttextoptions)
+  - [Parameters](#parameters-6)
+- [DetectHtmlOptions](#detecthtmloptions)
+  - [Parameters](#parameters-7)
+- [DetectMarkdownOptions](#detectmarkdownoptions)
   - [Parameters](#parameters-8)
+  - [Examples](#examples-1)
 - [reverseAST](#reverseast)
   - [Parameters](#parameters-9)
 
@@ -92,6 +92,27 @@ detectHtml('<p>old</p>', '<p class="new-cls">new</p>').text
 
 Returns **[DetectResult](#detectresult)**
 
+### Remark
+
+- **See: [remark](https://github.com/remarkjs/remark) - Markdown processor powered by plugins**
+
+Type: {}
+
+### AST
+
+- **See: [Markdown AST](https://github.com/syntax-tree/mdast)**
+- **See: [HTML AST](https://github.com/syntax-tree/hast)**
+- **See: [remark](https://github.com/remarkjs/remark) - Markdown processor on MDAST**
+- **See: [rehype](https://github.com/rehypejs/rehype) - Markdown processor on HAST**
+
+Type: {}
+
+### Rehype
+
+- **See: [rehype](https://github.com/rehypejs/rehype) - HTML processor powered by plugins**
+
+Type: {}
+
 ### DetectResult
 
 Type: {}
@@ -102,6 +123,48 @@ Type: {}
 - `ast` **[AST](#ast)** Be Injected `className` and `style`'s AST
 - `state` **[DetectedState](#detectedstate)**
 - `node` **[AST](#ast)** Real updated AST node
+
+### DetectOptions
+
+Type: {}
+
+#### Parameters
+
+- `reverse` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** (optional, default `true`)
+
+### DetectedState
+
+Type: {}
+
+#### Parameters
+
+- `node` **[AST](#ast)** Founded node
+- `paths` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)>** The child indexes' track when traversing AST for finding `node`
+- `parents` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[AST](#ast)>** The parents' track when traversing AST for finding `node`
+
+### DetectTextOptions
+
+**Extends DetectOptions**
+
+Type: {}
+
+#### Parameters
+
+- `ast` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should returns `ast` (optional, default `true`)
+- `text` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should returns `text` (optional, default `true`)
+- `style` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting style in changed node, e.g: `color: red;`
+- `position` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should AST's node carry with position information. (optional, default `true`)
+- `className` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting class in changed node (optional, default `'detected-updated'`)
+
+### DetectHtmlOptions
+
+**Extends DetectTextOptions**
+
+Type: {}
+
+#### Parameters
+
+- `rehype` **[Rehype](#rehype)** a Rehype instance (for parsing string to HAST) (optional, default `require('rehype')()`)
 
 ### DetectMarkdownOptions
 
@@ -136,69 +199,6 @@ remark()
   .stringify(detectMarkdown('# old', '# new', { wrapType: 'ast' }).ast)
 // => '<h1 class="detected-updated">new</h1>\n'
 ```
-
-### Rehype
-
-- **See: [rehype](https://github.com/rehypejs/rehype) - HTML processor powered by plugins**
-
-Type: {}
-
-### AST
-
-- **See: [Markdown AST](https://github.com/syntax-tree/mdast)**
-- **See: [HTML AST](https://github.com/syntax-tree/hast)**
-- **See: [remark](https://github.com/remarkjs/remark) - Markdown processor on MDAST**
-- **See: [rehype](https://github.com/rehypejs/rehype) - Markdown processor on HAST**
-
-Type: {}
-
-### DetectHtmlOptions
-
-**Extends DetectTextOptions**
-
-Type: {}
-
-#### Parameters
-
-- `rehype` **[Rehype](#rehype)** a Rehype instance (for parsing string to HAST) (optional, default `require('rehype')()`)
-
-### Remark
-
-- **See: [remark](https://github.com/remarkjs/remark) - Markdown processor powered by plugins**
-
-Type: {}
-
-### DetectOptions
-
-Type: {}
-
-#### Parameters
-
-- `reverse` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** (optional, default `true`)
-
-### DetectedState
-
-Type: {}
-
-#### Parameters
-
-- `node` **[AST](#ast)** Founded node
-- `paths` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)>** The child indexes' track when traversing AST for finding `node`
-- `parents` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[AST](#ast)>** The parents' track when traversing AST for finding `node`
-
-### DetectTextOptions
-
-**Extends DetectOptions**
-
-Type: {}
-
-#### Parameters
-
-- `ast` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should returns `ast` (optional, default `true`)
-- `text` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should returns `text` (optional, default `true`)
-- `style` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting style in changed node, e.g: `color: red;`
-- `position` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Should AST's node carry with position information. (optional, default `true`)
-- `className` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Injecting class in changed node (optional, default `'detected-updated'`)
 
 ### reverseAST
 
