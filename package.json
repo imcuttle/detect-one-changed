@@ -95,8 +95,8 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "detect-tree-changed": "^1.0.1",
     "@moyuyc/visit-tree": "^1.0.0",
+    "detect-tree-changed": "^1.1.0",
     "is-plain-obj": "^1.1.0",
     "loader-utils": "^1.1.0",
     "lodash.clonedeep": "^4.5.0",
