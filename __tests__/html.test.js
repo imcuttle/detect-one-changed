@@ -5,7 +5,7 @@
  * @description
  *
  */
-const { detectHtml } = require('../')
+const { detectHtml, defaultEqual } = require('../')
 const { fixture } = require('./helper')
 const rehype = require('rehype')
 const fs = require('fs')
@@ -17,7 +17,37 @@ function runDetect(name, opts) {
   return detectHtml(oldMd, newMd, opts)
 }
 
+function isHeadNode(node) {
+  return ['h1', 'h2', 'h3', 'h4'].includes(node && node.tagName && node.tagName.toLowerCase())
+}
+
+const linkyEqual = (nodeA, nodeB) => {
+  if (isHeadNode(nodeA)) {
+    nodeA = Object.assign({}, nodeA, {
+      properties: null
+    })
+  }
+  if (isHeadNode(nodeB)) {
+    nodeB = Object.assign({}, nodeB, {
+      properties: null
+    })
+  }
+  return defaultEqual(nodeA, nodeB)
+}
+
 describe('html-detect-changed', function() {
+  it('linky-2', () => {
+    expect(runDetect('linky-2', { reverse: false, equal: linkyEqual }).text).toMatchInlineSnapshot(`
+"<h1 id=\\"temprdldi1oi9cqktemp\\"><a data-type=\\"concept\\" data-key=\\"s2zsvj2mg4e__20190502_1243\\" data-text=\\"[个人][每日站会][当前][c组] 余聪 - 2019-05\\">余聪 - 2019-05</a></h1>
+<h2 id=\\"icebox\\">icebox</h2>
+<ul>
+  <li>[ ] <a href=\\"https://editorjs.io/\\">editor.js</a> 协同编辑</li>
+</ul>
+<p class=\\"detected-updated\\">asdasdw</p>
+"
+`)
+  })
+
   it('linky', () => {
     expect(runDetect('linky').text).toMatchInlineSnapshot(`
 "<h1 id=\\"tempngzqvc6t478utemp\\"><a data-type=\\"concept\\" data-key=\\"law2e7r95pi__20190309_2357\\" data-text=\\"[测试] 本地测试文档\\">本地测试文档</a></h1>
