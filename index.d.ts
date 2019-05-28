@@ -7,13 +7,14 @@ type AST = any
 
 type DetectOptions = {
   reverse?: boolean
+  equal?: (a, b) => boolean
 }
 type DetectedState = {
   node: AST
   paths: number[]
   parents: AST[]
 }
-type DetectTextOptions = {
+type DetectTextOptions = DetectOptions & {
   ast?: boolean
   text?: boolean
   style?: string
@@ -44,6 +45,7 @@ declare const detectOneChanged: {
   detectAst: (oldAst: AST, newAst: AST, opt?: DetectOptions) => null | DetectedState
   detectHtml: (oldHtml: AST | string, newHtml: AST | string, opt?: DetectHtmlOptions) => DetectedResult
   detectMarkdown: (oldMarkdown: AST | string, oldMarkdown: AST | string, opt?: DetectMarkdownOptions) => DetectedResult
+  defaultEqual: (a, b) => boolean
 }
 
 export = detectOneChanged
