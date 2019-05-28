@@ -95,7 +95,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "@moyuyc/visit-tree": "^1.0.0",
+    "@moyuyc/visit-tree": "^2.0.1",
     "detect-tree-changed": "^1.2.4",
     "is-plain-obj": "^1.1.0",
     "loader-utils": "^1.1.0",
