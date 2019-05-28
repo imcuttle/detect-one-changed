@@ -40,6 +40,7 @@ Find changed one node from AST
 - `newAst` **[AST](#ast)**
 - `options` **[DetectOptions](#detectoptions)** (optional, default `{}`)
   - `options.reverse` (optional, default `true`)
+  - `options.equal` (optional, default `defaultEqual`)
 
 Returns **(null | [DetectedState](#detectedstate))**
 
@@ -61,6 +62,7 @@ Detect markdown updating
   - `options.className` (optional, default `'detected-updated'`)
   - `options.position` (optional, default `true`)
   - `options.remark` (optional, default `require('remark')()`)
+  - `options.equal`
 
 Returns **any** DetectResult
 
@@ -80,6 +82,7 @@ Detect html updating
   - `options.style` (optional, default `''`)
   - `options.className` (optional, default `'detected-updated'`)
   - `options.rehype` (optional, default `require('rehype')()`)
+  - `options.equal`
 
 #### Examples
 
@@ -131,6 +134,7 @@ Type: {}
 #### Parameters
 
 - `reverse` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** (optional, default `true`)
+- `equal` **[function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)** (optional, default `require('lodash.isequalwith')`)
 
 ### DetectedState
 

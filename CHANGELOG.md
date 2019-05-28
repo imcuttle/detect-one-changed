@@ -1,3 +1,13 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/imcuttle/detect-one-changed/compare/v2.0.2...v2.1.0) (2019-05-28)
+
+
+### Features
+
+* export equal ([8a2974a](https://github.com/imcuttle/detect-one-changed/commit/8a2974a))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/imcuttle/detect-one-changed/compare/v2.0.1...v2.0.2) (2019-02-08)
 
