@@ -87,7 +87,7 @@
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0",
     "raw-loader": "^0.5.1",
-    "remark-html": "^8.0.0",
+    "remark-html": "^13.0.2",
     "remark-preset-gfm": "^1.0.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.23.1",
